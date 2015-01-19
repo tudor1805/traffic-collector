@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<context:component-scan base-package="ro.pub.cs.capim.dao" />
+	<bean id="abstractService" class="ro.pub.cs.capim.service.AbstractService" abstract="true">
+	</bean>
+	
+	<bean id="availableCarsService" class="ro.pub.cs.capim.service.AvailableCarsService" parent="abstractService">
+		<property name="dao" ref="availableCarsDAO"/>
+	</bean>
+	<bean id="streetsService" class="ro.pub.cs.capim.service.StreetsService" parent="abstractService">
+		<property name="dao" ref="streetsDAO"/>
+	</bean>
+	<bean id="nodesService" class="ro.pub.cs.capim.service.NodesService" parent="abstractService">
+		<property name="dao" ref="nodesDAO"/>
+	</bean>
+	<bean id="cabsService" class="ro.pub.cs.capim.service.CabsService" parent="abstractService">
+		<property name="dao" ref="cabsDAO"/>
+	</bean>
+</beans>
