@@ -1,19 +1,9 @@
 package ro.pub.acs.traffic.collector;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.URLEncoder;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.*;
+import java.net.*;
+import java.sql.*;
+import java.util.*;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.StringTokenizer;
 
 import com.mysql.jdbc.Statement;
 
@@ -22,6 +12,7 @@ class ConnectionThread extends Thread {
 	Socket socket;
 	boolean debug;
 	DBManager db;
+	
 	
 	public static final String DATE_FORMAT_NOW = "yyyy_MM_dd_HH_mm_ss";
 	
@@ -190,7 +181,8 @@ class ConnectionThread extends Thread {
 }
 
 public class TrafficCollectorServer {
-	
+
+	private static int listeningPort = 8082;
 	/**
 	 * Main method.
 	 * @param args array of command line arguments
@@ -201,11 +193,13 @@ public class TrafficCollectorServer {
 		
 		try {
 			// create server socket on the 8082 port.
-			serverSocket = new ServerSocket(8082);
+			serverSocket = new ServerSocket(listeningPort);
 			
 			// set debug value.
 			if (args.length == 1 && args[0].equals("-v"))
 				debug = true;
+
+			System.out.println("Listening on port: " + listeningPort);
 			
 			while (true) {
 				Socket clientSocket = serverSocket.accept();
