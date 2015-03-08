@@ -82,13 +82,10 @@
     </target>
     <target depends="dist" name="run" description="run the server">
         <echo message="Running the Server..."/>
-        <java fork="true" classname="ro.pub.acs.traffic.collector.TrafficCollectorServer">
-        <arg line="${args}"/>
-        <classpath>
-            <path refid="TrafficCollectorServer.classpath"/>
-            <path location="${dist}/TrafficCollectorServer.jar"/>
-        </classpath>
-        </java>
+        <exec executable="/bin/sh">
+            <arg value="-c"/>
+            <arg value="nohup java -jar ${dist}/TrafficCollectorServer.jar &amp;"/>
+        </exec>
     </target>
 </project>
 
