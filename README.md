@@ -6,9 +6,9 @@ I do not own the intellectual rights for this project.
 
 ### Running the TrafficCollector Server
 
-    ```sh
-    $ ant -buildfile build-noeclipse.xml run
-    ```
+```sh
+$ ant -buildfile build-noeclipse.xml run
+```
 
 ### Version
 1.0
