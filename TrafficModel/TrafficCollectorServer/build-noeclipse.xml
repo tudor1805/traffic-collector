@@ -19,7 +19,6 @@
     <property name="source" value="1.6"/>
     <property name="build" location="bin"/>
     <property name="dist" location="dist"/>
-    <property name="logs" location="~/traffic-collector-logs"/>
     <path id="TrafficCollectorServer.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/commons-codec-1.6.jar"/>
@@ -83,11 +82,12 @@
        </jar>
     </target>
     <target depends="dist" name="run">
-        <mkdir dir="${logs}"/>
+        <property name="log-dir" value="/home/${user.name}/traffic-collector-logs" />
+        <mkdir dir="${log-dir}"/>
         <echo message="Running the Server..."/>
         <exec executable="/bin/sh">
             <arg value="-c"/>
-            <arg value="sudo nohup java -jar ${dist}/TrafficCollectorServer.jar 1>${logs}/traffic-collector.log 2>${logs}/traffic-collector-errs.log &amp;"/>
+            <arg value="nohup java -jar ${dist}/TrafficCollectorServer.jar 1>${log-dir}/traffic-collector.log 2>${log-dir}/traffic-collector-errs.log &amp;"/>
         </exec>
     </target>
 </project>
