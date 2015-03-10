@@ -19,6 +19,7 @@
     <property name="source" value="1.6"/>
     <property name="build" location="bin"/>
     <property name="dist" location="dist"/>
+    <property name="logs" location="~/traffic-collector-logs"/>
     <path id="TrafficCollectorServer.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/commons-codec-1.6.jar"/>
@@ -67,9 +68,10 @@
             <classpath refid="TrafficCollectorServer.classpath"/>
         </javac>
     </target>
-    <target depends="build" name="dist" description="generate the distribution">
+    <target depends="build" name="dist">
         <!-- Create the distribution directory -->
         <mkdir dir="${dist}"/>
+
         <!-- Create the jar file -->
         <jar jarfile="${dist}/TrafficCollectorServer.jar" basedir="${build}" update="true">
             <exclude name="old/**"/>
@@ -77,14 +79,15 @@
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Main-Class" value="ro.pub.acs.traffic.collector.TrafficCollectorServer"/>
                 <attribute name="Class-Path" value="mysql-connector-java-5.1.7-bin.jar"/>
-            </manifest>	
+            </manifest>
        </jar>
     </target>
-    <target depends="dist" name="run" description="run the server">
+    <target depends="dist" name="run">
+        <mkdir dir="${logs}"/>
         <echo message="Running the Server..."/>
         <exec executable="/bin/sh">
             <arg value="-c"/>
-            <arg value="nohup java -jar ${dist}/TrafficCollectorServer.jar &amp;"/>
+            <arg value="sudo nohup java -jar ${dist}/TrafficCollectorServer.jar 1>${logs}/traffic-collector.log 2>${logs}/traffic-collector-errs.log &amp;"/>
         </exec>
     </target>
 </project>
