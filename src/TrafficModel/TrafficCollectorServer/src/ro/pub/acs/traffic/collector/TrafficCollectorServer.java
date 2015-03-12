@@ -131,9 +131,11 @@ class ConnectionThread extends Thread {
 					outFile = new BufferedWriter(fstream);
 					
 					StringTokenizer pos = new StringTokenizer(nextLine, " ");
-					String lat, lng, speed, timestamp;
-					lat = pos.nextToken();
-					lng = pos.nextToken();
+					String speed, timestamp;
+					Double lat, lng;
+
+					lat = Double.parseDouble(pos.nextToken());
+					lng = Double.parseDouble(pos.nextToken());
 					speed = pos.nextToken();
 					timestamp = pos.nextToken();
 					
