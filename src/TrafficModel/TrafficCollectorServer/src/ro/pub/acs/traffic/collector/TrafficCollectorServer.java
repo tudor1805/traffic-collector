@@ -29,33 +29,36 @@ class ConnectionThread extends Thread {
 	@Override
 	public void run() {
 		try {
+			System.out.println("Accepted new connection from: " +
+				socket.getRemoteSocketAddress().toString());
+
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			String nextLine;
-			
+
 			// read the first line.
 			nextLine = in.readLine();
 			if (debug)
 				System.out.println(nextLine);
-			
+
 			// exit if the message format is incorrect.
 			if (nextLine.startsWith("#s#"))
 				out.println("ACK");
 			else
 				return;
-			
+
 			nextLine = nextLine.replace("#s#", "");
 			Calendar cal = Calendar.getInstance();
-		    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+			SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
 			String filename = "journey" + URLEncoder.encode(sdf.format(cal.getTime()), "UTF-8") + ".log";
-			
+
 			File file = new File("logs", filename);
-			
+
 			FileWriter fstream = new FileWriter(file, true);
 			BufferedWriter outFile = new BufferedWriter(fstream);
-			
+
 			StringTokenizer st = new StringTokenizer(nextLine, "#");
-			
+
 			String name = st.nextToken();
 			String facebook = st.nextToken();
 			String twitter = st.nextToken();
@@ -67,18 +70,18 @@ class ConnectionThread extends Thread {
 			current_token = st.nextToken();
 			String staticId = current_token.equals("0") ? "" : ct.decrypt(current_token);
 			//System.out.println("line1: " + nextLine);
-			
+
 			try {
 				db = new DBManager();
 				Statement statement = (Statement) db.getConn().createStatement();
-			
+
 				ResultSet rs = null; 
 				rs = statement.executeQuery("SELECT * FROM location WHERE id_user='" + id_user + "'");
 				if(!rs.next())
 					db.doQuery("INSERT INTO location " +
 								"(id_user, name, facebook, twitter, lat, lng, speed, timestamp, stop) " +
 								"VALUES " +
-								"('" + id_user + "', '" + name + "', '" + facebook + "', '" + twitter + "', '', '', '', '', 0)");
+								"('" + id_user + "', '" + name + "', '" + facebook + "', '" + twitter + "', '0', '0', '', '', 0)");
 				else { 
 					db.doQuery("UPDATE location SET " +
 								"name = '" + name + "', " +
@@ -113,14 +116,14 @@ class ConnectionThread extends Thread {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-			
+
+
 			outFile.write(nextLine);
 			outFile.newLine();
-			
+
 			outFile.close();
 			fstream.close();
-			
+
 			// receive data and write it to file.
 			nextLine = in.readLine();
 			if(nextLine != null)
@@ -149,7 +152,7 @@ class ConnectionThread extends Thread {
 									"WHERE id_user='" + id_user + "'");
 					
 					db.close();
-					
+
 					outFile.write(nextLine);
 					outFile.newLine();
 					nextLine = in.readLine();
@@ -206,8 +209,6 @@ public class TrafficCollectorServer {
 			System.out.println("Listening on port: " + listeningPort);
 			
 			while (true) {
-				System.out.println("Accepted new connection");
-
 				Socket clientSocket = serverSocket.accept();
 				Thread connectionThread = new ConnectionThread(clientSocket, debug);
 				new Thread(connectionThread).start();

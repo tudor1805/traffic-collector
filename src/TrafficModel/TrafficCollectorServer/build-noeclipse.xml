@@ -28,30 +28,6 @@
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
-                <exclude name="**/*.uad"/>
-                <exclude name="**/*.ucd"/>
-                <exclude name="**/*.uld"/>
-                <exclude name="**/*.upd"/>
-                <exclude name="**/*.cop"/>
-                <exclude name="**/*.udd"/>
-                <exclude name="**/*.uod"/>
-                <exclude name="**/*.usd"/>
-                <exclude name="**/*.utd"/>
-                <exclude name="**/*.uud"/>
-                <exclude name="**/*.ame"/>
-                <exclude name="**/*.odd"/>
-                <exclude name="**/*.ead"/>
-                <exclude name="**/*.ecd"/>
-                <exclude name="**/*.eld"/>
-                <exclude name="**/*.epd"/>
-                <exclude name="**/*.edd"/>
-                <exclude name="**/*.eod"/>
-                <exclude name="**/*.esd"/>
-                <exclude name="**/*.etd"/>
-                <exclude name="**/*.eud"/>
-                <exclude name="**/*.eame"/>
-                <exclude name="**/*.urd*.uml"/>
-                <exclude name="**/*.ecore"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -72,11 +48,13 @@
 
         <!-- Create the jar file -->
         <jar jarfile="${dist}/TrafficCollectorServer.jar" basedir="${build}" update="true">
+            <zipgroupfileset dir="lib" includes="*.jar"/>
             <exclude name="old/**"/>
             <manifest>
+                <attribute name="DependencyFinder" value="main"/>
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Main-Class" value="ro.pub.acs.traffic.collector.TrafficCollectorServer"/>
-                <attribute name="Class-Path" value="mysql-connector-java-5.1.7-bin.jar"/>
+                <attribute name="Class-Path" value="mysql-connector-java-5.1.7-bin.jar commons-codec-1.6.jar"/>
             </manifest>
        </jar>
     </target>
@@ -92,15 +70,21 @@
         <mkdir dir="${server-log-dir}"/>
         <mkdir dir="${log-dir}"/>
 
+        <echo message="Deploying the server to ${deploy-dir}"/>
         <copy includeemptydirs="false" todir="${jar-dir}">
             <fileset dir="${dist}">
             </fileset>
         </copy>
 
-        <echo message="Running the Server..."/>
-        <exec executable="/bin/sh">
+        <echo message="Running the server ..."/>
+        <exec executable="/bin/sh" dir="${deploy-dir}">
             <arg value="-c"/>
+            <arg value="nohup java -jar ${jar-dir}/TrafficCollectorServer.jar -v"/>
+
+<!--
+            Use this when in production
             <arg value="nohup java -jar ${jar-dir}/TrafficCollectorServer.jar -v 2>&amp;1 1>${server-log-dir}/tc.log &amp;"/>
+-->
         </exec>
     </target>
 </project>
