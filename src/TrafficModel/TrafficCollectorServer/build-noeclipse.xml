@@ -68,7 +68,6 @@
         </javac>
     </target>
     <target depends="build" name="dist">
-        <!-- Create the distribution directory -->
         <mkdir dir="${dist}"/>
 
         <!-- Create the jar file -->
@@ -82,12 +81,26 @@
        </jar>
     </target>
     <target depends="dist" name="run">
-        <property name="log-dir" value="/home/${user.name}/traffic-collector-logs" />
+        <property name="deploy-dir" value="/home/${user.name}/traffic-collector-deploy" />
+        <property name="jar-dir" value="${deploy-dir}/jar" />
+        <property name="server-log-dir" value="${deploy-dir}/server-logs" />
+        <property name="log-dir" value="${deploy-dir}/logs" />
+
+        <delete dir="${deploy-dir}"/>
+        <mkdir dir="${deploy-dir}"/>
+        <mkdir dir="${jar-dir}"/>
+        <mkdir dir="${server-log-dir}"/>
         <mkdir dir="${log-dir}"/>
+
+        <copy includeemptydirs="false" todir="${jar-dir}">
+            <fileset dir="${dist}">
+            </fileset>
+        </copy>
+
         <echo message="Running the Server..."/>
         <exec executable="/bin/sh">
             <arg value="-c"/>
-            <arg value="nohup java -jar ${dist}/TrafficCollectorServer.jar 1>${log-dir}/traffic-collector.log 2>${log-dir}/traffic-collector-errs.log &amp;"/>
+            <arg value="nohup java -jar ${jar-dir}/TrafficCollectorServer.jar -v 2>&amp;1 1>${server-log-dir}/tc.log &amp;"/>
         </exec>
     </target>
 </project>
