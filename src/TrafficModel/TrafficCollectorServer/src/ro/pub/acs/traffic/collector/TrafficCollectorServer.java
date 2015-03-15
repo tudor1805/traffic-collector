@@ -198,12 +198,16 @@ public class TrafficCollectorServer {
 			serverSocket = new ServerSocket(listeningPort);
 			
 			// set debug value.
-			if (args.length == 1 && args[0].equals("-v"))
+			if (args.length == 1 && args[0].equals("-v")) {
+				System.out.println("Debug mode activated");
 				debug = true;
+		    }
 
 			System.out.println("Listening on port: " + listeningPort);
 			
 			while (true) {
+				System.out.println("Accepted new connection");
+
 				Socket clientSocket = serverSocket.accept();
 				Thread connectionThread = new ConnectionThread(clientSocket, debug);
 				new Thread(connectionThread).start();
