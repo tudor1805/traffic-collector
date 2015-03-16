@@ -220,7 +220,8 @@ public class TrafficCollectorService extends Service
 		{
 			try {
 				String reply = "";
-				socket = new Socket("cipsm.hpc.pub.ro", 8082);
+				// socket = new Socket("cipsm.hpc.pub.ro", 8082);
+				socket = new Socket("mobiway.hpc.pub.ro", 8082);
 				out = new PrintWriter(socket.getOutputStream(), true);
                 in = new BufferedReader(new InputStreamReader(
                 		socket.getInputStream()));
