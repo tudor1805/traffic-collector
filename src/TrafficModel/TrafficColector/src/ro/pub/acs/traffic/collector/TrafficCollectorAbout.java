@@ -1,5 +1,6 @@
 package ro.pub.acs.traffic.collector;
 
+import ro.pub.acs.traffic.app_settings.AppSettings;
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -23,7 +24,7 @@ public class TrafficCollectorAbout extends Activity {
 						"[1] and Rutgers University [2].\n\n" + 
 						"For more information or if you find any bugs, please visit <a href=\"http://code.google.com/p/traffic-collector/\">http://code.google.com/p/traffic-collector/</a>"+
 						"<br/><br/>"+
-						"[1] <a href=\"http://cipsm.hpc.pub.ro/vanet/\">University POLITEHNICA of Bucharest</a><br/>" +
+						"[1] <a href=\"http://" + AppSettings.serverHost + "/vanet/\">University POLITEHNICA of Bucharest</a><br/>" +
 						"[2] <a href=\"http://http://discolab.rutgers.edu/\">Rutgers University</a>";
 		String html = "<html>" +
 				 "<head></head>" + 
