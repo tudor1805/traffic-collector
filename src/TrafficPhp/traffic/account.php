@@ -415,7 +415,7 @@ function checkForm() {
 	<!--  start footer-left -->
 	<div id="footer-left">
 
-	Traffic Collector &copy; Copyright Politehnica University of Bucharest. <span id="spanYear">2012</span> <a href="http://cipsm.hpc.pub.ro">http://cipsm.hpc.pub.ro</a>. All rights reserved.</div>
+	Traffic Collector &copy; Copyright Politehnica University of Bucharest. <span id="spanYear">2012</span> <a href="http://mobiway.hpc.pub.ro">http://mobiway.hpc.pub.ro</a>. All rights reserved.</div>
 	<!--  end footer-left -->
 	<div class="clear">&nbsp;</div>
 </div>

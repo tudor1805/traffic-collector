@@ -1,4 +1,5 @@
 <?php
+require_once("constants.inc.php");
 require_once("authorize.php");
 require_once("SingletonDB.class.php");
 
@@ -298,9 +299,9 @@ $(".info-various").fancybox();
 								$i = 0;
 								while($line = $res->fetch_assoc())
 								{
-									if(filesize("/home/cipsm/TrafficServer/logs/".$line['file']) != 0)
+									if(filesize(TC_SERV_LOG_PATH . "" . $line['file']) != 0)
 									{
-										$fh = fopen("/home/cipsm/TrafficServer/logs/".$line['file'], "r");
+										$fh = fopen(TC_SERV_LOG_PATH . "" . $line['file'], "r");
 										$pos = 0;
 										$linie = fgets($fh, 4096);
 										while (($linie = fgets($fh, 4096)) !== false) 
@@ -406,7 +407,7 @@ $(".info-various").fancybox();
 	<!--  start footer-left -->
 	<div id="footer-left">
 
-	Traffic Collector &copy; Copyright Politehnica University of Bucharest. <span id="spanYear">2012</span> <a href="http://cipsm.hpc.pub.ro">http://cipsm.hpc.pub.ro</a>. All rights reserved.</div>
+	Traffic Collector &copy; Copyright Politehnica University of Bucharest. <span id="spanYear">2012</span> <a href="http://mobiway.hpc.pub.ro">http://mobiway.hpc.pub.ro</a>. All rights reserved.</div>
 	<!--  end footer-left -->
 	<div class="clear">&nbsp;</div>
 </div>

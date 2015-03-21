@@ -7,6 +7,7 @@ time
 length
 */
 
+require_once("constants.inc.php");
 require_once("SingletonDB.class.php");
 
 function distance_haversine($lat1, $lon1, $lat2, $lon2, $param) 
@@ -51,7 +52,7 @@ session_start();
 $res = $db->query("SELECT * FROM history WHERE id=".$_GET['id']);
 $line = $res->fetch_assoc();
 
-$fh = fopen("/home/cipsm/TrafficServer/logs/".$line['file'], "r");
+$fh = fopen(TC_SERV_LOG_PATH . "" . $line['file'], "r");
 $line = fgets($fh, 4096);
 $max_speed = 0;
 $length = 0;

@@ -1,6 +1,7 @@
 <?php
 header("Content-type: text/xml");
 
+require_once("constants.inc.php");
 require_once("SingletonDB.class.php");
 
 $db = SingletonDB::connect();
@@ -15,9 +16,9 @@ if(isset($_GET['type']) && $_GET['type'] == 1)
 
 echo "<markers>";
 if(isset($_GET['type']) && $_GET['type'] == 1)
-	$fh = fopen("/home/cipsm/TrafficServer/logs/".$line['file'], "r");
+	$fh = fopen(TC_SERV_LOG_PATH . "" . $line['file'], "r");
 else if(isset($_GET['type']) && $_GET['type'] == 2)
-	$fh = fopen("/home/cipsm/TrafficServer/logs/journey2012_04_19_19_26_25.log_onRoad", "r");
+	$fh = fopen(TC_SERV_LOG_PATH . "" . journey2012_04_19_19_26_25.log_onRoad", "r");
 	
 $line = fgets($fh, 4096);
 while (($line = fgets($fh, 4096)) !== false) 

@@ -1,6 +1,8 @@
 <?php
+
 header("Content-type: text/xml");
 
+require_once("constants.inc.php");
 require_once("SingletonDB.class.php");
 
 $db = SingletonDB::connect();
@@ -11,7 +13,7 @@ $res = $db->query("SELECT * FROM history WHERE id=".$_GET['id']);
 $line = $res->fetch_assoc();
 
 echo "<markers>";
-$fh = fopen("/home/cipsm/TrafficServer/logs/".$line['file'], "r");
+$fh = fopen(TC_SERV_LOG_PATH . "" . $line['file'], "r");
 $line = fgets($fh, 4096);
 while (($line = fgets($fh, 4096)) !== false) 
 {
