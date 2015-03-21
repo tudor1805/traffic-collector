@@ -6,76 +6,73 @@
     android:gravity="center_horizontal">
 	    <LinearLayout android:layout_height="wrap_content"
 	        android:id="@+id/linearLayout1"
-	        android:layout_width="440px">
+	        android:layout_width="240sp">
 		        <Button android:id="@+id/bstart"
 			        android:layout_height="wrap_content"
 			        android:text="Start"
-			        android:layout_width="220px"
+			        android:layout_width="120sp"
 			        style="@style/startButton">
 			        </Button>
 		        <Button android:id="@+id/bpause"
 			        android:layout_height="wrap_content"
 			        android:text="Stop"
-			        android:layout_width="220px"
+			        android:layout_width="120sp"
 			        style="@style/pauseButton">
 			        </Button>
 	    </LinearLayout>
 	    <CheckedTextView 
-			xmlns:android="http://schemas.android.com/apk/res/android"     
 			android:id="@+id/real_time" 
 			android:text="Real-time"
-			android:textSize="15dip"
+			android:textSize="15sp"
 			android:paddingLeft="20dip" 
 			android:paddingRight="20dip" 
 			android:paddingTop="10dip"
 			android:paddingBottom="10dip" 
 			android:orientation="vertical" 
-			android:layout_width="240px" 
+			android:layout_width="200dp" 
 			android:layout_height="?android:attr/listPreferredItemHeight"  
 			android:gravity="center_vertical"
 			android:checkMark="?android:attr/listChoiceIndicatorMultiple"></CheckedTextView>
 	    <ScrollView android:id="@+id/ScrollView"
-			android:layout_width="300px"
+			android:layout_width="100dp"
 			android:layout_height="wrap_content">
 				 <Button android:id="@+id/bupload"
 			        android:layout_height="wrap_content"
 			        android:text="Upload Data"
-			        android:layout_width="300px">
+			        android:layout_width="100dp">
 			        </Button>
 		</ScrollView>
 		<TextView android:textAppearance="?android:attr/textAppearanceLarge" 
 			android:text="TextView" 
-			android:textSize="18dip"
+			android:textSize="18sp"
 			android:layout_height="wrap_content" 
 			android:id="@+id/status" 
 			android:layout_width="wrap_content" 
-			android:layout_below="@+id/ScrollView" 
-			android:layout_alignParentLeft="true" 
 			android:layout_marginTop="19dp"></TextView>
 		<LinearLayout android:layout_height="wrap_content"
-	        android:id="@+id/linearLayout1"
-	        android:layout_width="440px">
+	        android:id="@+id/linearLayout2"
+	        android:layout_width="240dp">
 		         <Button android:id="@+id/bshare"
 			        android:layout_height="wrap_content"
 			        android:text="Share Position"
-			        android:layout_width="220px">
+			        android:layout_width="120dp">
 			        </Button>
 		         <Button android:id="@+id/bstopshare"
 			        android:layout_height="wrap_content"
 			        android:text="Stop Sharing"
-			        android:layout_width="220px">
+			        android:layout_width="120dp">
 			        </Button>
 		</LinearLayout>
-		 <ScrollView android:id="@+id/ScrollView"
-			android:layout_width="300px"
+		 <ScrollView android:id="@+id/ScrollView2"
+			android:layout_width="120dp"
 			android:layout_height="wrap_content">
 				 <Button android:id="@+id/bregenerate"
 			        android:layout_height="wrap_content"
 			        android:text="Regenerate ID"
-			        android:layout_width="300px">
+			        android:layout_width="120dp">
 			        </Button>
 		</ScrollView>
-		<WebView xmlns:android="http://schemas.android.com/apk/res/android"
+		<WebView
 		    android:id="@+id/where"
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
