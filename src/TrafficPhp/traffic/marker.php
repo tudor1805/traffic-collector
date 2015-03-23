@@ -18,7 +18,7 @@ echo "<markers>";
 if(isset($_GET['type']) && $_GET['type'] == 1)
 	$fh = fopen(TC_SERV_LOG_PATH . "" . $line['file'], "r");
 else if(isset($_GET['type']) && $_GET['type'] == 2)
-	$fh = fopen(TC_SERV_LOG_PATH . "" . journey2012_04_19_19_26_25.log_onRoad", "r");
+	$fh = fopen(TC_SERV_LOG_PATH . "" . "journey2012_04_19_19_26_25.log_onRoad", "r");
 	
 $line = fgets($fh, 4096);
 while (($line = fgets($fh, 4096)) !== false) 
@@ -33,12 +33,14 @@ while (($line = fgets($fh, 4096)) !== false)
 		$marker = 'slow';
 	else if($speed <= 1)
 		$marker = 'stop';
-	/* $content = file_get_contents("http://maps.googleapis.com/maps/api/geocode/xml?latlng=".$elements[0].",".$elements[1]."&sensor=false&key=AIzaSyAS9SruJhVgFDp4P3PZPAPFgtcSZ2YjVYs");
+/*
+	$content = file_get_contents("http://maps.googleapis.com/maps/api/geocode/xml?latlng=".$elements[0].",".$elements[1]."&sensor=false&key=AIzaSyB_JRyT6pqtylf36u66OEPp0M8Qkpp0G8g");
 	$rss = simplexml_load_string($content);
 	$location = $rss->result->geometry->location;
 	$lat = $location->lat;
 	$lng = $location->lng;
-	exit; */
+	exit;
+*/
 	$lat = $elements[0];
 	$lng = $elements[1];
 	echo '<marker ';

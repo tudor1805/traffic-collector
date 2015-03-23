@@ -6,7 +6,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <title>Google Maps JavaScript API v3 Example: KmlLayer KML</title>
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyAKpTOgdR4K5uxGfjcjIfO74X9beh3vpPU"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyB_JRyT6pqtylf36u66OEPp0M8Qkpp0G8g"></script>
 <script type="text/javascript">
 function initialize() {
   var chicago = new google.maps.LatLng(41.875696,-87.624207);

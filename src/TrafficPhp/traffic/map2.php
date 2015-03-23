@@ -11,9 +11,9 @@ require_once("authorize.php");
 				position: absolute; left: 0;top: 0; right: 0; bottom: 0;
 			}
 		</style>
-		<link rel="stylesheet" type="text/css" href="http://141.85.99.169/traffic/css/screen_.css" media="all">
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDIe7ti8bv08uZA4XdfUfT3XdkywR4-oGY"></script>
-		<script type="text/javascript" src="http://141.85.99.169/traffic/js/jquery/jquery-1.4.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://141.85.164.61/traffic/css/screen_.css" media="all">
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyB_JRyT6pqtylf36u66OEPp0M8Qkpp0G8g"></script>
+		<script type="text/javascript" src="http://141.85.164.61/traffic/js/jquery/jquery-1.4.1.min.js"></script>
 		<script type="text/javascript" src="js/StyledMarker.js"></script>
 		<script type="text/javascript">
 			//<![CDATA[

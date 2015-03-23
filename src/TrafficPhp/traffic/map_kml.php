@@ -8,7 +8,7 @@
 				position: absolute; left: 0;top: 0; right: 0; bottom: 0;
 			}
 		</style>
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyAKpTOgdR4K5uxGfjcjIfO74X9beh3vpPU"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyB_JRyT6pqtylf36u66OEPp0M8Qkpp0G8g"></script>
 		<script type="text/javascript">
 			//<![CDATA[
 
