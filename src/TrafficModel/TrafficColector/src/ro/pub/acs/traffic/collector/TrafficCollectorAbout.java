@@ -1,6 +1,7 @@
 package ro.pub.acs.traffic.collector;
 
 import ro.pub.acs.traffic.app_settings.AppSettings;
+import ro.pub.acs.traffic.utils.PhoneUtils;
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -34,7 +35,18 @@ public class TrafficCollectorAbout extends Activity {
 				"</html>";
 		view.setVerticalScrollBarEnabled(false);
 		view.setHorizontalScrollBarEnabled(false);
+		
+		//String bla = AppContacts.fetchContacts(this);
+		//String bla = PhoneContacts.fetchContacts(this).toString();
+		//String bla2 = PhoneContacts.fetchOwnPhoneNumber(this).toString();
+		
+		
+		
+		//view.loadData("TEXT [" + bla2 + "]", "text/html", "utf-8");
 		view.loadData(html, "text/html", "utf-8");
 		setContentView(view);
+		
+		
+		
     }
 }
