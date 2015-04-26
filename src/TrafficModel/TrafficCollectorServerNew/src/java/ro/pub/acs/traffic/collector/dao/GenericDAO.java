@@ -75,9 +75,8 @@ public abstract class GenericDAO<T extends Serializable, ID extends Serializable
 
     /**
      * Use this inside subclasses as a convenience method.
-     *
      * @param criterion
-     * @return
+     * @return 
      */
     @SuppressWarnings("unchecked")
     protected List<T> findByCriteria(Criterion... criterion) {

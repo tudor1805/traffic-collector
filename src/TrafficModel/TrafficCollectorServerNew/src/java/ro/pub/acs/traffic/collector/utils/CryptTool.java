@@ -8,6 +8,20 @@ import javax.crypto.spec.IvParameterSpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+/**
+ * DESede Encryption And Decryption Technique Usage
+ *
+ * CryptTool myEncryptor = new CryptTool();
+ * if (Integer.parseInt(args[0]) == 0) {
+ *    String stringToEncrypt = args[1]; 
+ *    String encrypted = myEncryptor.encrypt(stringToEncrypt);
+ * System.out.println(encrypted); 
+ * } else if (Integer.parseInt(args[0]) == 1) {
+ *    String stringToDecrypt = args[1];
+ *    String decrypted = myEncryptor.decrypt(stringToDecrypt);
+ *    System.out.println(decrypted);
+ * }
+ */
 public class CryptTool {
 
     private static final String SHARED_KEY = "XtHVMwLjtxq5ilOpSGHmc2PSvoQ9W0wv9taPREsj";
@@ -71,24 +85,5 @@ public class CryptTool {
             stringBuffer.append((char) bytes[i]);
         }
         return stringBuffer.toString();
-    }
-
-    /**
-     * Testing The DESede Encryption And Decryption Technique
-     *
-     * @param args
-     * @throws java.lang.Exception
-     */
-    public static void main(String args[]) throws Exception {
-        CryptTool myEncryptor = new CryptTool();
-        if (Integer.parseInt(args[0]) == 0) {
-            String stringToEncrypt = args[1];
-            String encrypted = myEncryptor.encrypt(stringToEncrypt);
-            System.out.println(encrypted);
-        } else if (Integer.parseInt(args[0]) == 1) {
-            String stringToDecrypt = args[1];
-            String decrypted = myEncryptor.decrypt(stringToDecrypt);
-            System.out.println(decrypted);
-        }
     }
 }

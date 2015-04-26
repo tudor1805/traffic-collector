@@ -13,19 +13,24 @@
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 
-    <bean id="historyDAO" class="ro.pub.acs.traffic.collector.dao.HistoryDAO" parent="genericDao">
-        <property name="persistentClass" value="ro.pub.acs.traffic.collector.domain.History" />
+    <bean id="journeyDAO" class="ro.pub.acs.traffic.collector.dao.JourneyDAO" parent="genericDao">
+        <property name="persistentClass" value="ro.pub.acs.traffic.collector.domain.Journey" />
+    </bean>
+
+    <bean id="journeyDataDAO" class="ro.pub.acs.traffic.collector.dao.JourneyDataDAO" parent="genericDao">
+        <property name="persistentClass" value="ro.pub.acs.traffic.collector.domain.JourneyData" />
     </bean>
 
     <bean id="locationDAO" class="ro.pub.acs.traffic.collector.dao.LocationDAO" parent="genericDao">
         <property name="persistentClass" value="ro.pub.acs.traffic.collector.domain.Location" />
     </bean>
 
-    <bean id="statsDAO" class="ro.pub.acs.traffic.collector.dao.StatsDAO" parent="genericDao">
-        <property name="persistentClass" value="ro.pub.acs.traffic.collector.domain.Stats" />
+    <bean id="userContactDAO" class="ro.pub.acs.traffic.collector.dao.UserContactDAO" parent="genericDao">
+        <property name="persistentClass" value="ro.pub.acs.traffic.collector.domain.UserContact" />
     </bean>
 
-    <bean id="usersDAO" class="ro.pub.acs.traffic.collector.dao.UsersDAO" parent="genericDao">
-        <property name="persistentClass" value="ro.pub.acs.traffic.collector.domain.Users" />
+    <bean id="userDAO" class="ro.pub.acs.traffic.collector.dao.UserDAO" parent="genericDao">
+        <property name="persistentClass" value="ro.pub.acs.traffic.collector.domain.User" />
     </bean>
+
 </beans>

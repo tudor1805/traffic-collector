@@ -1,44 +1,48 @@
 package ro.pub.acs.traffic.collector.utils;
 
-import java.io.*;
-import java.util.StringTokenizer;
-
 public class Utils {
 
-    public static boolean checkFile(String filename) {
-        int pos = 0;
+    private static Double toRad(Double value) {
+        return value * Math.PI / 180;
+    }
 
-        try {
-            // Open the file that is the first
-            // command line parameter
-            FileInputStream fstream = new FileInputStream("logs/" + filename);
-            
-            // Get the object of DataInputStream
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String strLine = br.readLine();
+    public static Double distanceHaversine(
+            Double lat1, Double lon1, Double lat2, Double lon2, String param) {
 
-            //Read File Line By Line
-            while ((strLine = br.readLine()) != null) {
-                // Print the content on the console
-                StringTokenizer st = new StringTokenizer(strLine, " ");
-                String speed = st.nextToken();
-                speed = st.nextToken();
-                if (!(speed.equals("-2"))) {
-                    pos++;
-                }
-                if (pos == 1) {
-                    break;
-                }
-            }
-            //Close the input stream
-            in.close();
-        } catch (IOException e) {
-            //Catch exception if any
-            System.err.println("Error: " + e.getMessage());
-            return false;
+        final Double earthRadius = 3960.00;
+        Double latDistance = lat2 - lat1;
+        Double lonDistance = lon2 - lon1;
+
+        Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        Double distance = earthRadius * c;
+
+        switch (param) {
+            case "miles":
+                return distance;
+            case "km":
+                return distance * 1.609344;
+            default:
+                return (distance * 1.609344) / 1000;
         }
+    }
 
-        return true;
+    public static String getTime(Double seconds) {
+        Double diffSeconds = seconds;
+        Double diffWeeks = Math.floor(diffSeconds / 604800);
+        diffSeconds -= diffWeeks * 604800;
+
+        Double diffDays = Math.floor(diffSeconds / 86400);
+        diffSeconds -= diffDays * 86400;
+
+        Double diffHours = Math.floor(diffSeconds / 3600);
+        diffSeconds -= diffHours * 3600;
+
+        Double diffMinutes = Math.floor(diffSeconds / 60);
+        diffSeconds -= diffMinutes * 60;
+
+        return diffHours + " h " + diffMinutes + " m " + diffSeconds + " s";
     }
 }

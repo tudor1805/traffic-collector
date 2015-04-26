@@ -26,11 +26,12 @@
 
     <!-- Resolves logical view names to JSP views -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/*"/>
+        <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+    <bean id="viewResolver" class=
+            "org.springframework.web.servlet.view.BeanNameViewResolver" />
 
     <!-- Database configuration -->
     <import resource="DataSource.xml"/>
@@ -39,5 +40,11 @@
     <!-- DAO and Service configuration -->
     <import resource="spring-dao.xml"/>
     <import resource="spring-service.xml"/>
-
+    
+    
+    <mvc:resources mapping="/traffic/**" location="/traffic/" />
+    
+     <!-- Configures Spring MVC 
+    <import resource="mvc-config.xml" />   
+    -->
 </beans>

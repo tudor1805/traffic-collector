@@ -28,10 +28,11 @@
 
         <property name="annotatedClasses">
             <list>
-                <value>ro.pub.acs.traffic.collector.domain.History</value>
+                <value>ro.pub.acs.traffic.collector.domain.Journey</value>
+                <value>ro.pub.acs.traffic.collector.domain.JourneyData</value>
                 <value>ro.pub.acs.traffic.collector.domain.Location</value>
-                <value>ro.pub.acs.traffic.collector.domain.Stats</value>
-                <value>ro.pub.acs.traffic.collector.domain.Users</value>
+                <value>ro.pub.acs.traffic.collector.domain.User</value>
+                <value>ro.pub.acs.traffic.collector.domain.UserContact</value>                
             </list>
         </property>
 

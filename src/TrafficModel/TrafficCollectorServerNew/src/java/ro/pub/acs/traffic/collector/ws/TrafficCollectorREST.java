@@ -7,38 +7,32 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ro.pub.acs.traffic.collector.service.LocationService;
+import ro.pub.acs.traffic.collector.utils.*;
+
+import org.json.simple.JSONObject;
+import ro.pub.acs.traffic.collector.service.*;
 
 @Controller
+@RequestMapping(value = "/rest/*")
 public class TrafficCollectorREST {
 
     @Autowired
     private LocationService locationService;
+
+    @Autowired
+    private UserService usersService;
+
     @Autowired
     private ServletContext context;
+
+    private static final CryptTool ct = new CryptTool();
 
     private static final Logger logger
             = Logger.getLogger(TrafficCollectorREST.class.getName());
 
-    @RequestMapping(method = RequestMethod.POST, value = "/updateLocation")
-    public @ResponseBody
-    String updateLocation(@RequestBody String content) {
-
-        return "updateLocation";
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/requestFriendUpdates")
-    public @ResponseBody
-    String requestFriendUpdates() {
-
-        return "requestFriendUpdates";
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/cancelFriendUpdates")
-    public @ResponseBody
-    String cancelFriendUpdates() {
-
-        return "requestFriendUpdates";
+    private void prettyPrintJSON(JSONObject json) {
+        // To string method prints it with specified indentation.
+        System.out.println(json.toJSONString());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/test")

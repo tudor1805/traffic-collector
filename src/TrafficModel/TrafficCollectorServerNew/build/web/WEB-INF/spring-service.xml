@@ -12,19 +12,15 @@
     <bean id="abstractService" class="ro.pub.acs.traffic.collector.service.AbstractService" abstract="true">
     </bean>
 
-    <bean id="historyService" class="ro.pub.acs.traffic.collector.service.HistoryService" parent="abstractService">
-        <property name="dao" ref="historyDAO"/>
+    <bean id="journeyService" class="ro.pub.acs.traffic.collector.service.JourneyService" parent="abstractService">
+        <property name="dao" ref="journeyDAO"/>
     </bean>
 
     <bean id="locationService" class="ro.pub.acs.traffic.collector.service.LocationService" parent="abstractService">
         <property name="dao" ref="locationDAO"/>
     </bean>
 
-    <bean id="statsService" class="ro.pub.acs.traffic.collector.service.StatsService" parent="abstractService">
-        <property name="dao" ref="statsDAO"/>
-    </bean>
-
-    <bean id="usersService" class="ro.pub.acs.traffic.collector.service.UsersService" parent="abstractService">
-        <property name="dao" ref="usersDAO"/>
+    <bean id="userService" class="ro.pub.acs.traffic.collector.service.UserService" parent="abstractService">
+        <property name="dao" ref="userDAO"/>
     </bean>
 </beans>

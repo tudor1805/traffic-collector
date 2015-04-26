@@ -4,7 +4,12 @@ import java.security.*;
 
 public class HashString {
 
-    MessageDigest md;
+    /* Usage 
+     String str = "aqwsedrftg";
+     HashString hs = new HashString("SHA1");
+     System.out.println(hs.hash(str));
+     */
+    private MessageDigest md;
 
     public HashString(String algorithm) {
         try {
@@ -30,9 +35,4 @@ public class HashString {
         return bytesToHex(output).toLowerCase();
     }
 
-    public static void main(String[] args) {
-        String str = "aqwsedrftg";
-        HashString hs = new HashString("SHA1");
-        System.out.println(hs.hash(str));
-    }
 }

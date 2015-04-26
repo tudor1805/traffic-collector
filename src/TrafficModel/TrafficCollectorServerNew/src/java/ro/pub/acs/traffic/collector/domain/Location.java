@@ -1,181 +1,113 @@
 package ro.pub.acs.traffic.collector.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "location")
-
 public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-
-    @Basic(optional = false)
-    @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
     @Column(name = "id_user")
-    private String idUser;
+    private Integer idUser;
 
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
-    @Column(name = "name")
-    private String name;
+    @Column(name = "latitude")
+    private float latitude;
 
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
-    @Column(name = "facebook")
-    private String facebook;
+    @Column(name = "longitude")
+    private float longitude;
 
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
-    @Column(name = "twitter")
-    private String twitter;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "lat")
-    private float lat;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "lng")
-    private float lng;
-
-    @Basic(optional = false)
-    @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
     @Column(name = "speed")
-    private String speed;
+    private int speed;
 
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 65535)
     @Column(name = "timestamp")
-    private String timestamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timestamp;
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "stop")
-    private int stop;
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user", insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private User user;
 
     public Location() {
     }
 
-    public Location(Integer id) {
-        this.id = id;
+    public Location(Integer idUser) {
+        this.idUser = idUser;
     }
 
-    public Location(Integer id, String idUser, String name, String facebook, String twitter, float lat, float lng, String speed, String timestamp, int stop) {
-        this.id = id;
+    public Location(Integer idUser, float latitude, float longitude, int speed, Date timestamp) {
         this.idUser = idUser;
-        this.name = name;
-        this.facebook = facebook;
-        this.twitter = twitter;
-        this.lat = lat;
-        this.lng = lng;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.speed = speed;
         this.timestamp = timestamp;
-        this.stop = stop;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
-    public String getName() {
-        return name;
+    public float getLatitude() {
+        return latitude;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 
-    public String getFacebook() {
-        return facebook;
+    public float getLongitude() {
+        return longitude;
     }
 
-    public void setFacebook(String facebook) {
-        this.facebook = facebook;
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 
-    public String getTwitter() {
-        return twitter;
-    }
-
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
-    }
-
-    public float getLat() {
-        return lat;
-    }
-
-    public void setLat(float lat) {
-        this.lat = lat;
-    }
-
-    public float getLng() {
-        return lng;
-    }
-
-    public void setLng(float lng) {
-        this.lng = lng;
-    }
-
-    public String getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed(String speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 
-    public int getStop() {
-        return stop;
+    public User getUser() {
+        return user;
     }
 
-    public void setStop(int stop) {
-        this.stop = stop;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return "ro.pub.acs.traffic.collector.dao.Location[ id=" + id + " ]";
+        return "ro.pub.acs.traffic.collector.domain.Location[ idUser=" + idUser + " ]";
     }
 
 }
