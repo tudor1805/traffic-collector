@@ -29,8 +29,9 @@ public class Utils {
         }
     }
 
-    public static String getTime(Double seconds) {
-        Double diffSeconds = seconds;
+    public static String getTime(Long seconds) {
+        Double diffSeconds = new Double(seconds);
+        
         Double diffWeeks = Math.floor(diffSeconds / 604800);
         diffSeconds -= diffWeeks * 604800;
 

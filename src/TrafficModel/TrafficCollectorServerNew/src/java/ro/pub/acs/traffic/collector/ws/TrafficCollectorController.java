@@ -42,10 +42,22 @@ public class TrafficCollectorController {
         return (User) session.getAttribute("user");
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public ModelAndView showDefaultPage() {
+
+        return new ModelAndView("redirect:login");
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/login")
     public ModelAndView loginPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/traffic/login");
+
+        User user = getCurrentUser();
+        if (user != null) {
+            mav.setViewName("redirect:table");
+        } else {
+            mav.setViewName("/traffic/login");
+        }
 
         return mav;
     }
@@ -174,7 +186,7 @@ public class TrafficCollectorController {
     @RequestMapping(method = RequestMethod.GET,
             value = "/marker", produces = "application/xml")
     public @ResponseBody
-    Markers getMarkers(
+    Markers showMarkers(
             @RequestParam(value = "id") int journeyId) {
 
         // Return an xml with location markers during this journey
@@ -228,7 +240,7 @@ public class TrafficCollectorController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/map")
-    public ModelAndView getMap(
+    public ModelAndView showMap(
             @RequestParam(value = "id") int journeyId) {
         ModelAndView mav = new ModelAndView();
 
@@ -244,18 +256,69 @@ public class TrafficCollectorController {
 
     @RequestMapping(
             method = RequestMethod.GET, value = "/stats", produces = "application/html")
-    public ModelAndView getJourneyStats(
+    public ModelAndView showJourneyStats(
             @RequestParam(value = "id") int journeyId) {
+
         ModelAndView mav = new ModelAndView();
 
         User user = getCurrentUser();
         if (user != null) {
             Journey journey = journeyService.findById(journeyId);
 
-            mav.addObject("maxSpeed", "");
-            mav.addObject("tripLength", "");
-            mav.addObject("tripTime", "");
-            mav.addObject("avgSpeed", "");
+            if (journey != null) {
+                Date timeStart = null, timeEnd = null;
+                Double maxSpeedKmH = 0.0;
+
+                Float lastLat = null, lastLon = null;
+                Double totalLengthKm = 0.0;
+
+                Collection<JourneyData> journeyData = journey.getJourneyDataCollection();
+
+                for (JourneyData jd : journey.getJourneyDataCollection()) {
+
+                    if (timeStart == null) {
+                        timeStart = jd.getTimestamp();
+                    } else {
+                        timeEnd = jd.getTimestamp();
+                    }
+
+                    Double speed = jd.getSpeed() * 3.6;
+
+                    // Calculate the maximum speed
+                    if (speed > maxSpeedKmH) {
+                        maxSpeedKmH = speed;
+                    }
+
+                    // Calculate the total length
+                    if (lastLat == null && lastLon == null) {
+                        lastLat = jd.getLatitude();
+                        lastLon = jd.getLongitude();
+                    } else {
+                        Double length = Utils.distanceHaversine(
+                                new Double(lastLat), new Double(lastLon),
+                                new Double(jd.getLatitude()), new Double(jd.getLongitude()), "km");
+                        totalLengthKm += length;
+
+                        lastLat = jd.getLatitude();
+                        lastLon = jd.getLongitude();
+                    }
+                }
+
+                // Calculate total traveling time and speed
+                String totalTimeFormatted = "0";
+                Double avgSpeed = 0.0;
+                if (timeStart != null && timeEnd != null) {
+                    totalTimeFormatted = Utils.getTime(timeEnd.getTime() - timeStart.getTime());
+                    Long totalTimeSeconds
+                            = (timeEnd.getTime() - timeStart.getTime()) / 1000;
+                    avgSpeed = totalLengthKm * 3600 / totalTimeSeconds;
+                }
+
+                mav.addObject("maxSpeed", maxSpeedKmH);
+                mav.addObject("tripLength", totalLengthKm);
+                mav.addObject("tripTime", totalTimeFormatted);
+                mav.addObject("avgSpeed", avgSpeed);
+            }
 
             mav.setViewName("/traffic/stats");
         } else {

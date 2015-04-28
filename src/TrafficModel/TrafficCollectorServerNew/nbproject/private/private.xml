@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Global">
-            <file>file:/C:/Users/Tudor/Documents/NetBeansProjects/TrafficCollectorServerNew/src/java/ro/pub/acs/traffic/collector/ws/TrafficCollectorREST.java</file>
+            <file>file:/C:/Users/Tudor/Documents/NetBeansProjects/TrafficCollectorServerNew/src/java/ro/pub/acs/traffic/collector/ws/DefaultController.java</file>
+            <file>file:/C:/Users/Tudor/Documents/NetBeansProjects/TrafficCollectorServerNew/src/java/ro/pub/acs/traffic/collector/utils/Utils.java</file>
+            <file>file:/C:/Users/Tudor/Documents/NetBeansProjects/TrafficCollectorServerNew/web/traffic/account.jsp</file>
             <file>file:/C:/Users/Tudor/Documents/NetBeansProjects/TrafficCollectorServerNew/web/WEB-INF/SpringDispatcherServlet.xml</file>
+            <file>file:/C:/Users/Tudor/Documents/NetBeansProjects/TrafficCollectorServerNew/src/java/ro/pub/acs/traffic/collector/ws/TrafficCollectorController.java</file>
             <file>file:/C:/Users/Tudor/Documents/NetBeansProjects/TrafficCollectorServerNew/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Tudor/Documents/NetBeansProjects/TrafficCollectorServerNew/web/traffic/stats.jsp</file>
         </group>
     </open-files>
 </project-private>
